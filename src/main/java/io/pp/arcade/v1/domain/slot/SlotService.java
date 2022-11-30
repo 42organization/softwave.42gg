@@ -190,7 +190,7 @@ public class SlotService {
         else if (slotMode == Mode.RANK && gamePpp != null && Math.abs(userPpp - gamePpp) > pppGap) {
             status = SlotStatusType.CLOSE;
         }
-        else if (headCount.equals(maxCount)) {
+        else if (headCount.equals(maxCount) || headCount > maxCount) {
             status = SlotStatusType.CLOSE;
         } else if (dto.getUserMode() != null && !dto.getUserMode().equals(dto.getSlot().getMode()) && !dto.getSlot().getMode().equals(Mode.BOTH)) {
             status = SlotStatusType.CLOSE;

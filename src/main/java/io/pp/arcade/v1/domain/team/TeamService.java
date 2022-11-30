@@ -135,14 +135,6 @@ public class TeamService {
     public TeamsUserListDto findUserListInTeamsForNoti(SlotDto slotDto, UserDto curUser) {
         List<SlotTeamUser> slotTeamUsers = slotTeamUserRepository.findAllBySlotId(slotDto.getId());
         SlotTeamUser currentUser = slotTeamUserRepository.findSlotTeamUserBySlotIdAndUserId(slotDto.getId(), curUser.getId()).orElse(null);
-        if (currentUser == null) {
-            DeletedSlotTeamUser temp = deletedTeamUserRepository.findSlotTeamUserBySlotIdAndUserId(slotDto.getId(), curUser.getId()).orElseThrow(() -> new BusinessException("E0001"));
-            currentUser = SlotTeamUser.builder()
-                    .team(temp.getTeam())
-                    .slot(temp.getSlot())
-                    .user(temp.getUser())
-                    .build();
-        }
 
         List<GameUserInfoDto> myTeam = new ArrayList<>();
         List<GameUserInfoDto> enemyTeam = new ArrayList<>();

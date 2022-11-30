@@ -38,7 +38,7 @@ public class NotiControllerImpl implements NotiController {
         notis.forEach(noti -> {
             if (noti.getType().equals(NotiType.ANNOUNCE)) {
                 notiDtos.add(NotiAnnounceDto.builder()
-                        .id(noti.getId())
+                        .id(noti.getSlot().getId())
                         .type(noti.getType())
                         .isChecked(noti.getIsChecked())
                         .message(noti.getMessage())
@@ -59,7 +59,7 @@ public class NotiControllerImpl implements NotiController {
                 teamsUserListDto.getMyTeam().forEach(userDto -> myTeam.add(userDto.getIntraId()));
                 teamsUserListDto.getEnemyTeam().forEach(userDto -> enemyTeam.add(userDto.getIntraId()));
                 notiDtos.add(NotiImminentMatchDto.builder()
-                        .id(noti.getId())
+                        .id(noti.getSlot().getId())
                         .type(noti.getType())
                         .time(noti.getSlot().getTime())
                         .isChecked(noti.getIsChecked())
@@ -69,7 +69,7 @@ public class NotiControllerImpl implements NotiController {
                         .build());
             } else if (noti.getType().equals(NotiType.CANCELEDBYMAN) || noti.getType().equals(NotiType.CANCELEDBYTIME)) {
                 notiDtos.add(NotiCanceledDto.builder()
-                        .id(noti.getId())
+                        .id(noti.getSlot().getId())
                         .type(noti.getType())
                         .time(noti.getSlot().getTime())
                         .isChecked(noti.getIsChecked())

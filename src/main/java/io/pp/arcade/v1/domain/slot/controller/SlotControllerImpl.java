@@ -205,6 +205,7 @@ public class SlotControllerImpl implements SlotController {
         if (currentMatch.getIsMatched() == true) {
             falsifyIsMatchedForRemainders(slot);
 //            redisTemplate.opsForValue().set(Key.PENALTY_USER + user.getIntraId(), "true", 60, TimeUnit.SECONDS);
+            notiGenerater.deleteMatchedNotisBySlot(slot);
             notiGenerater.addCancelNotisBySlot(NotiCanceledTypeDto.builder().slotDto(slot).notiType(NotiType.CANCELEDBYMAN).build());
         }
     }

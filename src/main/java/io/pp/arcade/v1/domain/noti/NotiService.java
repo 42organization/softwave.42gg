@@ -94,6 +94,18 @@ public class NotiService {
         return NotiDto.from(noti);
     }
 
+    public List<NotiDto> findNotisBySlotId(Integer slotId) {
+        return notiRepository.findAllBySlotId(slotId).stream().map(NotiDto::from).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteNotiById(Integer slotId) {
+        Noti noti = notiRepository.findById(slotId).orElse(null);
+        if (noti == null) {
+            return;
+        }
+        notiRepository.delete(noti);
+    }
     @Transactional
     public NotiCountDto countAllNByUser(NotiFindDto findDto) {
         User user = userRepository.findById(findDto.getUser().getId()).orElseThrow(() -> new BusinessException("E0001"));
