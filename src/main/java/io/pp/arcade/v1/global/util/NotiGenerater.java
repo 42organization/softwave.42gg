@@ -1,8 +1,10 @@
 package io.pp.arcade.v1.global.util;
 
+import io.pp.arcade.v1.domain.noti.Noti;
 import io.pp.arcade.v1.domain.noti.NotiService;
 import io.pp.arcade.v1.domain.noti.dto.NotiAddDto;
 import io.pp.arcade.v1.domain.noti.dto.NotiCanceledTypeDto;
+import io.pp.arcade.v1.domain.noti.dto.NotiDto;
 import io.pp.arcade.v1.domain.slot.dto.SlotDto;
 import io.pp.arcade.v1.domain.user.dto.UserDto;
 import io.pp.arcade.v1.global.type.GameType;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -36,6 +39,7 @@ public class NotiGenerater {
         SlotDto slot = canceledTypeDto.getSlotDto();
         NotiType notiType = canceledTypeDto.getNotiType();
         addNoti(null, slot, notiType);
+
     }
 
     private void addNoti(UserDto user, SlotDto slot, NotiType type) {
@@ -46,5 +50,12 @@ public class NotiGenerater {
                     .build();
             notiService.addNoti(notiAddDto);
         }
+    }
+
+    public void deleteMatchedNotisBySlot(SlotDto slot) {
+        List<NotiDto> notis = notiService.findNotisBySlotId(slot.getId());
+        notis.stream()
+                .filter(noti -> noti.getType().equals(NotiType.MATCHED))
+                .forEach(noti -> notiService.deleteNotiById(noti.getId()));
     }
 }
