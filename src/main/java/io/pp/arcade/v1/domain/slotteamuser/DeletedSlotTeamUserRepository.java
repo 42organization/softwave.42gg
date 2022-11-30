@@ -9,4 +9,5 @@ public interface DeletedSlotTeamUserRepository extends JpaRepository<DeletedSlot
     List<DeletedSlotTeamUser> findAllByTeamId(Integer teamId);
     List<DeletedSlotTeamUser> findAllByUserId(Integer userId);
     Optional<DeletedSlotTeamUser> findByTeamAndUser(Integer teamId, Integer userId);
+    Optional<DeletedSlotTeamUser> findSlotTeamUserBySlotIdAndUserId(Integer slotId, Integer userId);
 }

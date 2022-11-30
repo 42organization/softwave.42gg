@@ -53,7 +53,7 @@ public class NotiControllerImpl implements NotiController {
 //                        .createdAt(noti.getCreatdDate())
 //                        .build());
             } else if (noti.getType().equals(NotiType.MATCHED) || noti.getType().equals(NotiType.IMMINENT)) {
-                TeamsUserListDto teamsUserListDto = teamService.findUserListInTeams(noti.getSlot(), user);
+                TeamsUserListDto teamsUserListDto = teamService.findUserListInTeamsForNoti(noti.getSlot(), user);
                 List<String> myTeam = new ArrayList<>();
                 List<String> enemyTeam = new ArrayList<>();
                 teamsUserListDto.getMyTeam().forEach(userDto -> myTeam.add(userDto.getIntraId()));

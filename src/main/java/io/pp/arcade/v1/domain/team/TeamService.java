@@ -132,6 +132,36 @@ public class TeamService {
     }
 
     @Transactional
+    public TeamsUserListDto findUserListInTeamsForNoti(SlotDto slotDto, UserDto curUser) {
+        List<SlotTeamUser> slotTeamUsers = slotTeamUserRepository.findAllBySlotId(slotDto.getId());
+        SlotTeamUser currentUser = slotTeamUserRepository.findSlotTeamUserBySlotIdAndUserId(slotDto.getId(), curUser.getId()).orElse(null);
+        if (currentUser == null) {
+            DeletedSlotTeamUser temp = deletedTeamUserRepository.findSlotTeamUserBySlotIdAndUserId(slotDto.getId(), curUser.getId()).orElseThrow(() -> new BusinessException("E0001"));
+            currentUser = SlotTeamUser.builder()
+                    .team(temp.getTeam())
+                    .slot(temp.getSlot())
+                    .user(temp.getUser())
+                    .build();
+        }
+
+        List<GameUserInfoDto> myTeam = new ArrayList<>();
+        List<GameUserInfoDto> enemyTeam = new ArrayList<>();
+        for (SlotTeamUser slotTeamUser : slotTeamUsers) {
+            if (slotTeamUser.getTeam().equals(currentUser.getTeam())) {
+                myTeam.add(GameUserInfoDto.from(slotTeamUser.getUser()));
+            } else {
+                enemyTeam.add(GameUserInfoDto.from(slotTeamUser.getUser()));
+            }
+        }
+
+        TeamsUserListDto dto = TeamsUserListDto.builder()
+                .myTeam(myTeam)
+                .enemyTeam(enemyTeam)
+                .build();
+        return dto;
+    }
+
+    @Transactional
     public TeamPosDto findUsersByTeamPos(SlotDto slotDto, UserDto curUser) {
         List<SlotTeamUser> slotTeamUsers = slotTeamUserRepository.findAllBySlotId(slotDto.getId());
 
