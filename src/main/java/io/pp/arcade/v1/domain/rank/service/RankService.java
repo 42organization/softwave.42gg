@@ -212,7 +212,7 @@ public class RankService {
 
         Integer isWin = booleanToInt(updateDto.getIsWin());
         Integer updateWin = userRank.getWins() + isWin;
-        Integer updateLosses = userRank.getLosses() + isWin ^ 1;
+        Integer updateLosses = userRank.getLosses() + (isWin ^ 1);
         userRank.update(updateDto.getUpdatePpp(), updateWin, updateLosses);
     }
 
