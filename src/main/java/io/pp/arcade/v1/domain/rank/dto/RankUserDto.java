@@ -50,16 +50,21 @@ public class RankUserDto {
         return dto;
     }
 
-    public static RankUserDto from (Rank rank, Integer ranking) {
+    public static RankUserDto from (Rank rank, Integer ranking, Integer seasonStartPpp) {
         Integer wins = rank.getWins();
         Integer losses = rank.getLosses();
+
+        Integer totalGame = wins + losses;
+        Integer ppp = (totalGame == 0) ? seasonStartPpp : rank.getPpp();
+        Integer userRanking = (totalGame == 0) ? -1 : ranking;
+
         RankUserDto dto = RankUserDto.builder()
                 .intraId(rank.getUser().getIntraId())
-                .ppp(rank.getPpp())
-                .wins(rank.getWins())
-                .losses(rank.getLosses())
+                .ppp(ppp)
+                .wins(wins)
+                .losses(losses)
                 .winRate((wins + losses) == 0 ? 0 : (double)(wins * 10000 / (wins + losses)) / 100)
-                .rank(ranking == null ? -1 : ranking.intValue())
+                .rank(userRanking)
                 .statusMessage(rank.getUser().getStatusMessage())
                 .build();
         return dto;

@@ -38,7 +38,7 @@ public class RankControllerImpl implements RankController {
         RankRankingFindDto findRankingDto = RankRankingFindDto.builder().intraId(user.getIntraId()).userId(user.getId()).seasonDto(seasonDto).build();
         Integer myRanking = rankService.findRankingById(findRankingDto);
 
-        RankFindListDto rankFindListDto = RankFindListDto.builder().pageable(pageable).count(requestDto.getCount()).gameType(gametype).seasonId(seasonDto.getId()).build();
+        RankFindListDto rankFindListDto = RankFindListDto.builder().pageable(pageable).count(requestDto.getCount()).gameType(gametype).seasonDto(seasonDto).build();
         RankListDto rankListDto = rankService.findRankList(rankFindListDto);
 
         RankListResponseDto rankListResponseDto = RankListResponseDto.builder()

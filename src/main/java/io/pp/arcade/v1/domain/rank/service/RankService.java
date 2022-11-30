@@ -37,17 +37,7 @@ public class RankService {
     private final RankRepository rankRepository;
     private final UserRepository userRepository;
     private final SeasonRepository seasonRepository;
-    @Transactional
-    public RankListDto  findAllBySeasonId(Integer seasonId, Pageable pageable) {
-        Page<Rank> pageRank = rankRepository.findAllBySeasonId(seasonId, pageable);
-        List<RankUserDto> rankUserDtos = pageRank.stream().map(RankUserDto::from).collect(Collectors.toList());
-        RankListDto rankListDto =  RankListDto.builder()
-                .rankList(rankUserDtos)
-                .currentPage(pageRank.getNumber())
-                .totalPage(pageRank.getTotalPages())
-                .build();
-        return rankListDto;
-    }
+
     @Transactional
     public RankDto findBySeasonIdAndUserId(Integer seasonId, Integer userId) {
         Rank rank = rankRepository.findBySeasonIdAndUserId(seasonId, userId).orElse(null);
@@ -182,9 +172,10 @@ public class RankService {
         List<Rank> ranks = pageRanks.getContent();
         Integer index = pageable.getPageSize() * pageable.getPageNumber();
         List<RankUserDto> rankUserDtos = new ArrayList<>();
+        Integer seasonStartPpp = rankFindListDto.getSeasonDto().getStartPpp();
         for (Rank rank : ranks)
         {
-            rankUserDtos.add(RankUserDto.from(rank, ++index));
+            rankUserDtos.add(RankUserDto.from(rank, ++index, seasonStartPpp));
         }
         RankListDto rankListDto = RankListDto.builder()
                 .rankList(rankUserDtos)
@@ -202,7 +193,7 @@ public class RankService {
                 .user(userRepository.findById(userDto.getId()).orElseThrow())
                 .seasonId(season.getId())
                 .racketType(userDto.getRacketType())
-                .ppp(startPpp)
+                .ppp(0)
                 .ranking(0)
                 .wins(0)
                 .losses(0)
@@ -242,8 +233,21 @@ public class RankService {
 
         Rank userRank = rankRepository.findBySeasonIdAndUserId(seasonId, userId).orElseThrow(() -> new BusinessException("E0001"));
         Integer ranking = rankRepository.findRankingByIntraId(intraId);
+        Integer seasonStartPpp = findDto.getSeasonDto().getStartPpp();
 
-        return RankUserDto.from(userRank, ranking);
+        return RankUserDto.from(userRank, ranking, seasonStartPpp);
+    }
+
+    @Transactional
+    public RankListDto  findAllBySeasonId(Integer seasonId, Pageable pageable) {
+        Page<Rank> pageRank = rankRepository.findAllBySeasonId(seasonId, pageable);
+        List<RankUserDto> rankUserDtos = pageRank.stream().map(RankUserDto::from).collect(Collectors.toList());
+        RankListDto rankListDto =  RankListDto.builder()
+                .rankList(rankUserDtos)
+                .currentPage(pageRank.getNumber())
+                .totalPage(pageRank.getTotalPages())
+                .build();
+        return rankListDto;
     }
 
     private int booleanToInt(boolean value) {
