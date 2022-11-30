@@ -128,6 +128,9 @@ public class SlotControllerImpl implements SlotController {
         if (addReqDto.getMode() == Mode.CHALLENGE && addReqDto.getOpponent() == null && slot.getHeadCount() != 0) {
             throw new BusinessException("E0001");
         }
+        if (slot.getHeadCount() >= 2) {
+            throw new BusinessException("E0001");
+        }
     }
 
     private void checkIfModeMatches(SlotAddUserRequestDto addReqDto, SlotDto slot) {
