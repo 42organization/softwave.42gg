@@ -226,7 +226,7 @@ public class RankService {
     }
 
     @Transactional
-    public RankUserDto findRank(RankRedisFindDto findDto) {
+    public RankUserDto findRank(RankFindDto findDto) {
         Integer seasonId = findDto.getSeasonDto().getId();
         Integer userId = findDto.getUser().getId();
         String intraId = findDto.getUser().getIntraId();

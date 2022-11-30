@@ -9,7 +9,7 @@ import io.pp.arcade.v1.domain.game.dto.GameDto;
 import io.pp.arcade.v1.domain.pchange.PChangeService;
 import io.pp.arcade.v1.domain.pchange.dto.PChangeDto;
 import io.pp.arcade.v1.domain.pchange.dto.PChangeFindDto;
-import io.pp.arcade.v1.domain.rank.dto.RankRedisFindDto;
+import io.pp.arcade.v1.domain.rank.dto.RankFindDto;
 import io.pp.arcade.v1.domain.rank.dto.RankUserDto;
 import io.pp.arcade.v1.domain.rank.service.RankService;
 import io.pp.arcade.v1.domain.season.SeasonService;
@@ -36,7 +36,7 @@ public class GameRankFactory implements GameFactory {
     public GamePlayer getGamePlayer(GameDto gameDto, SlotTeamUserDto slotTeamUser) {
         GamePlayer gamePlayerDto;
         SeasonDto seasonDto = seasonService.findSeasonById(gameDto.getSeason());
-        RankUserDto rankUserDto = rankService.findRank(RankRedisFindDto.builder()
+        RankUserDto rankUserDto = rankService.findRank(RankFindDto.builder()
                 .seasonDto(seasonDto)
                 .gameType(gameDto.getSlot().getType())
                 .user(slotTeamUser.getUser()).build());

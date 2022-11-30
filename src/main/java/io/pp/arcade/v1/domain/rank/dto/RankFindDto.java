@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class RankRedisFindDto {
+public class RankFindDto {
     private UserDto user;
     private GameType gameType;
     private SeasonDto seasonDto;
