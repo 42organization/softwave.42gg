@@ -64,7 +64,7 @@ public class GameResponseManager {
                     .type(game.getSlot().getType())
                     .mode(game.getMode())
                     .status(game.getStatus())
-                    .time(game.getSlot().getTime())
+                    .time(game.getSlot().getModifiedAt())
                     .build());
         }
     }

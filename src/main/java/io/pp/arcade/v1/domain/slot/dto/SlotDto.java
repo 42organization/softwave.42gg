@@ -19,6 +19,7 @@ public class SlotDto {
     private Integer headCount;
     private GameType type;
     private Mode mode;
+    private LocalDateTime modifiedAt;
 
     //entity를 dto로 바꿔주는 메서드
     public static SlotDto from(Slot slot) {
@@ -30,6 +31,7 @@ public class SlotDto {
                 .headCount(slot.getHeadCount())
                 .type(slot.getType())
                 .mode(slot.getMode())
+                .modifiedAt(slot.getModifiedAt())
                 .build();
     }
 
