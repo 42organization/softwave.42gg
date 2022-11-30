@@ -11,7 +11,7 @@ import io.pp.arcade.v1.domain.pchange.dto.PChangeDto;
 import io.pp.arcade.v1.domain.pchange.dto.PChangeFindDto;
 import io.pp.arcade.v1.domain.pchange.dto.PChangeListDto;
 import io.pp.arcade.v1.domain.rank.dto.RankDto;
-import io.pp.arcade.v1.domain.rank.dto.RankRedisFindDto;
+import io.pp.arcade.v1.domain.rank.dto.RankFindDto;
 import io.pp.arcade.v1.domain.rank.dto.RankUpdateStatusMessageDto;
 import io.pp.arcade.v1.domain.rank.dto.RankUserDto;
 import io.pp.arcade.v1.domain.rank.service.RankService;
@@ -111,7 +111,7 @@ public class UserControllerImpl implements UserController {
         UserDto targetUser = userService.findByIntraId(UserFindDto.builder().intraId(targetUserId).build());
 
         SeasonDto seasonDto = seasonService.findSeasonById(season);
-        RankUserDto rankDto = rankService.findRank(RankRedisFindDto.builder().user(targetUser).seasonDto(seasonDto).gameType(GameType.SINGLE).build());
+        RankUserDto rankDto = rankService.findRank(RankFindDto.builder().user(targetUser).seasonDto(seasonDto).gameType(GameType.SINGLE).build());
         UserRankResponseDto responseDto = UserRankResponseDto.builder()
                 .rank(rankDto.getRank())
                 .ppp(rankDto.getPpp())

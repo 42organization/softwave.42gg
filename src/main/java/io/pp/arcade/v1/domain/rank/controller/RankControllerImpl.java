@@ -35,14 +35,14 @@ public class RankControllerImpl implements RankController {
         else
             seasonDto = seasonService.findLatestRankSeason();
 
-        RankRankingFindDto findRankingDto = RankRankingFindDto.builder().intraId(user.getIntraId()).userId(user.getId()).seasonDto(seasonDto).build();
-        Integer myRanking = rankService.findRankingById(findRankingDto);
+        RankFindDto findDto = RankFindDto.builder().seasonDto(seasonDto).user(user).gameType(gametype).build();
+        RankUserDto rank = rankService.findRank(findDto);
 
         RankFindListDto rankFindListDto = RankFindListDto.builder().pageable(pageable).count(requestDto.getCount()).gameType(gametype).seasonDto(seasonDto).build();
         RankListDto rankListDto = rankService.findRankList(rankFindListDto);
 
         RankListResponseDto rankListResponseDto = RankListResponseDto.builder()
-                .myRank(myRanking)
+                .myRank(rank.getRank())
                 .currentPage(rankListDto.getCurrentPage())
                 .totalPage(rankListDto.getTotalPage())
                 .rankList(rankListDto.getRankList())

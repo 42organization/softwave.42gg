@@ -87,7 +87,7 @@ class RankServiceTest {
         Integer count = 3;
         Integer page = 1;
         Pageable pageable = PageRequest.of(page, 20, Sort.by(Sort.Direction.DESC, "ppp"));
-        RankFindListDto rankingFindDto = RankFindListDto.builder().seasonId(season.getId()).count(count).gameType(GameType.SINGLE).pageable(pageable).build();
+        RankFindListDto rankingFindDto = RankFindListDto.builder().seasonDto(SeasonDto.from(season)).count(count).gameType(GameType.SINGLE).pageable(pageable).build();
 
         // when
         RankListDto rankListDto = rankService.findRankList(rankingFindDto);
@@ -176,7 +176,7 @@ class RankServiceTest {
         UserDto userDto = UserDto.from(users[0]);
         SeasonDto seasonDto = SeasonDto.from(season);
 
-        RankRedisFindDto findDto = RankRedisFindDto.builder().user(userDto).seasonDto(seasonDto).gameType(GameType.SINGLE).build();
+        RankFindDto findDto = RankFindDto.builder().user(userDto).seasonDto(seasonDto).gameType(GameType.SINGLE).build();
         //when
         RankUserDto rankUserDto = rankService.findRank(findDto);
 
