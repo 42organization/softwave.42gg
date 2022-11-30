@@ -32,7 +32,7 @@ public class DogUtil {
     }
 
     public String getRandomDogImage(String dog) {
-        return dogImageUrl + dog + "_" + (Math.abs((random.nextInt() % 10) + 1)) + ".png";
+        return dogImageUrl + dog + "_" + (Math.abs(random.nextInt() % 10) + 1) + ".png";
     }
 
     public String getRandomDogName(String dog) {
