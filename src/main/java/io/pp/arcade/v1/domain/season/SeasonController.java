@@ -30,12 +30,4 @@ public class SeasonController {
         SeasonListResponseDto responseDto = SeasonListResponseDto.builder().seasonMode(currentSeason.getSeasonMode().getCode()).seasonList(seasons).build();
         return responseDto;
     }
-
-    @PostConstruct
-    public void checkExistSeason() {
-        SeasonDto seasonDto = seasonService.findCurrentSeason();
-        SeasonCreateDto createDto = SeasonCreateDto.builder().seasonName("softwave").seasonMode(Mode.BOTH).pppGap(1000).startPpp(1000).build();
-        if (seasonDto == null)
-            seasonService.createSeasonByAdmin(createDto);
-    }
 }
