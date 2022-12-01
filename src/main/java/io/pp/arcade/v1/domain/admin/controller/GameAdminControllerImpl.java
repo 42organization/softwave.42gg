@@ -100,21 +100,22 @@ public class GameAdminControllerImpl implements GameAdminController {
     -> rank 수정
      */
     private void modifyUsersInfo(GameDto gameDto, TeamDto updatedTeam1, TeamDto updatedTeam2) {
-        Boolean isOneSide = Math.abs(updatedTeam1.getScore() - updatedTeam2.getScore()) == 2;
+//        Boolean isOneSide = Math.abs(updatedTeam1.getScore() - updatedTeam2.getScore()) == 2;
+        Integer differnece = Math.abs(updatedTeam1.getScore() - updatedTeam2.getScore());
         List<SlotTeamUserDto> slotTeamUsers = slotTeamUserService.findAllBySlotId(gameDto.getSlot().getId());
         for (SlotTeamUserDto slotTeamUser : slotTeamUsers) {
-            modifyUserPPPAndPChangeAndRank(gameDto, slotTeamUser, updatedTeam1, updatedTeam2, isOneSide);
+            modifyUserPPPAndPChangeAndRank(gameDto, slotTeamUser, updatedTeam1, updatedTeam2, differnece);
         }
     }
 
-    private void modifyUserPPPAndPChangeAndRank(GameDto game, SlotTeamUserDto slotTeamUser, TeamDto beforeEnemyTeamDto, TeamDto enemyTeamDto, Boolean isOneSide) {
+    private void modifyUserPPPAndPChangeAndRank(GameDto game, SlotTeamUserDto slotTeamUser, TeamDto beforeEnemyTeamDto, TeamDto enemyTeamDto, Integer difference) {
         PChangeDto pChangeDto = pChangeService.findPChangeByUserAndGame(PChangeFindDto.builder()
                 .game(game)
                 .user(slotTeamUser.getUser())
                 .build());
         Integer userPreviousPpp = pChangeDto.getPppResult() - pChangeDto.getPppChange();
 
-        Integer newPppChange = EloRating.pppChange(userPreviousPpp, enemyTeamDto.getTeamPpp(),!enemyTeamDto.getWin(), isOneSide);
+        Integer newPppChange = EloRating.pppChange(userPreviousPpp, enemyTeamDto.getTeamPpp(),!enemyTeamDto.getWin(), difference);
         Integer tmpPpp = userPreviousPpp + newPppChange;
         Integer userFinalPpp = tmpPpp > 0 ? tmpPpp : 0;
         UserModifyPppDto modifyPppDto = UserModifyPppDto.builder()
