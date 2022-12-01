@@ -8,6 +8,7 @@ BOOT-INF/
 backup_2022-08-23$05:00:01.sql
 build/
 out/
+logs/
 src/main/resources/application-local.yml
 src/main/resources/application-main.yml
 src/main/resources/application-test.yml
