@@ -72,7 +72,7 @@ public class GameManager {
     public void modifyTeams(GameDto game, GameResultRequestDto requestDto, List<SlotTeamUserDto> slotTeamUsers, UserDto curUser) {
         Integer gamePpp = game.getSlot().getGamePpp();
         SlotDto slot = game.getSlot();
-        Boolean isOneSide = Math.abs(requestDto.getMyTeamScore() - requestDto.getEnemyTeamScore()) == 2;
+        Integer difference = Math.abs(requestDto.getMyTeamScore() - requestDto.getEnemyTeamScore());
         TeamDto myTeam = slotTeamUserService.findTeamBySlotAndUser(slot.getId(), curUser.getId()).getTeam();
 
         for(SlotTeamUserDto slotTeamUser : slotTeamUsers) {
@@ -94,7 +94,7 @@ public class GameManager {
                 team = slotTeamUser.getTeam();
                 score = requestDto.getEnemyTeamScore();
             }
-            pppChange = EloRating.pppChange(slotTeamUser.getUser().getPpp(), enemyPpp, isWin, isOneSide);
+            pppChange = EloRating.pppChange(slotTeamUser.getUser().getPpp(), enemyPpp, isWin, difference);
             teamModifyGameResultDto = TeamModifyGameResultDto.builder()
                     .teamId(team.getId())
                     .score(score)
