@@ -21,7 +21,7 @@ class OpponentServiceTest {
     @Test
     void 유저가_조회된다() {
         //given
-        Opponent opponent1 = opponentRepository.save(new Opponent("salee2", "sal", "http:google.com", "hihi", true));
+        Opponent opponent1 = opponentRepository.save(new Opponent("salee2", "sal", "http:google.com", "hihi1", "hihi2", "hihi3", true));
         //when
         OpponentResponseDto responseDto = opponentService.findByIntraId(opponent1.getIntraId());
 
@@ -29,13 +29,13 @@ class OpponentServiceTest {
         assertThat(responseDto).isEqualTo(OpponentResponseDto.from(opponent1));
         assertThat(responseDto.getIntraId()).isEqualTo(opponent1.getIntraId());
         assertThat(responseDto.getNick()).isEqualTo(opponent1.getNick());
-        assertThat(responseDto.getDetail()).isEqualTo(opponent1.getDetail());
+        assertThat(responseDto.getDetail1()).isEqualTo(opponent1.getDetail1());
     }
 
     @Test
     void 랜덤3유저() {
         for (int i = 0; i < 12; i++) {
-            opponentRepository.save(new Opponent("id" + i, "nick" + i, "", "hihi", i % 3 != 0));
+            opponentRepository.save(new Opponent("id" + i, "nick" + i, "", "hihi1", "hihi2", "hihi3", i % 3 != 0));
         }
         opponentService.findRandom3Opponents().stream().map(OpponentResponseDto::toString).forEach(System.out::println);
     }

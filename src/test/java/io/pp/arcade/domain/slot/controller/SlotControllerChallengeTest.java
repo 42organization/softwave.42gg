@@ -71,7 +71,7 @@ public class SlotControllerChallengeTest {
         adminUsers = realWorld.getAdminUsers();
         opponents = new Opponent[10];
         for (int i = 0; i < 10; i++) {
-            opponents[i] = opponentRepository.save(new Opponent(adminUsers[i].getIntraId(), "nick" + i, "", "hihi", i % 3 != 0));
+            opponents[i] = opponentRepository.save(new Opponent(adminUsers[i].getIntraId(), "nick" + i, "", "hihi1", "hihi2", "hihi3", i % 3 != 0));
         }
         seasonRepository.save(Season.builder()
                         .seasonMode(Mode.BOTH)

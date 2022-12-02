@@ -19,14 +19,18 @@ public class Opponent {
     private String intraId;
     private String nick;
     private String imageUrl;
-    private String detail;
+    private String detail1;
+    private String detail2;
+    private String detail3;
     private Boolean isReady;
 
-    public Opponent(String intraId, String nick, String imageUrl, String detail, Boolean isReady) {
+    public Opponent(String intraId, String nick, String imageUrl, String detail1, String detail2, String detail3, Boolean isReady) {
         this.intraId = intraId;
         this.nick = nick;
         this.imageUrl = imageUrl;
-        this.detail = detail;
+        this.detail1 = detail1;
+        this.detail2 = detail2;
+        this.detail3 = detail3;
         this.isReady = isReady;
     }
 }
