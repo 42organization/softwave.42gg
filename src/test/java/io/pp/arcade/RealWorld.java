@@ -14,6 +14,7 @@ import io.pp.arcade.v1.domain.rank.entity.Rank;
 import io.pp.arcade.v1.domain.rank.entity.RankRedis;
 import io.pp.arcade.v1.domain.season.Season;
 import io.pp.arcade.v1.domain.season.SeasonRepository;
+import io.pp.arcade.v1.domain.security.jwt.Token;
 import io.pp.arcade.v1.domain.security.jwt.TokenRepository;
 import io.pp.arcade.v1.domain.slot.Slot;
 import io.pp.arcade.v1.domain.slot.SlotRepository;
@@ -33,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import static io.pp.arcade.v1.global.type.GameType.SINGLE;
 
@@ -850,9 +852,25 @@ public class RealWorld {
         return users;
     }
 
-//    public User[] getGuestUsers() {
-//        // 추후 게스트 양식 정해지는대로 작성
-//    }
+    public User[] getGuestUsers() {
+        // 추후 게스트 양식 정해지는대로 작성
+        User[] users = new User[5];
+        for (int i = 0; i < 5; i++) {
+            users[i] =  userRepository.save(User.builder()
+                    .intraId("guest" + i)
+                    .eMail("guest" + i + "@42gg.kr")
+                    .imageUri(defaultUrl)
+                    .racketType(RacketType.values()[i % 2])
+                    .statusMessage("Hello, I'm guest " + i)
+                    .ppp(1000)
+                    .totalExp(100 * i)
+                    .roleType(RoleType.USER)
+                    .build());
+            String uuid = String.valueOf(UUID.randomUUID());
+            tokenRepository.save(new Token(users[i], uuid, uuid));
+        }
+        return users;
+    }
 
     private User[] makeDeafultUsers() {
         User[] users = new User[10];
