@@ -68,6 +68,6 @@ public class DogUtil {
             default:
                 koreanDog = "비글";
         }
-        return DogAdjectives.getRandomAdjective() + koreanDog;
+        return DogAdjectives.getRandomAdjective() + " " + koreanDog;
     }
 }
