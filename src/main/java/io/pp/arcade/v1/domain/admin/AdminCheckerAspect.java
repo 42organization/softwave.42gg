@@ -51,16 +51,18 @@ public class AdminCheckerAspect {
 
         UserDto user = null;
         HttpSession session = request.getSession();
-        if (HeaderUtil.getAccessToken(request) != null) {
+        String accessToken = HeaderUtil.getAccessToken(request);
+        if (accessToken != null) {
             /* 관리자 유저 확인
             findAdminByAccessToken에서 관리자가 아닌 경우 메인 페이지로 리다이렉트*/
-            user = tokenService.findUserByAccessToken(HeaderUtil.getAccessToken(request));
+            user = tokenService.findUserByAccessToken(accessToken);
             session.setAttribute("user", AdminCheckerDto.builder().intraId(user.getIntraId()).roleType(user.getRoleType()).build());
+            CookieUtil.addCookie(response, "access_token", accessToken, 180);
         } else {
-            String cookie = CookieUtil.getCookie(request, "refresh_token")
+            String cookieAccessToken = CookieUtil.getCookie(request, "access_token")
                     .map(Cookie::getValue)
                     .orElseThrow();
-            user = tokenService.findAdminByRefreshToken(cookie);
+            user = tokenService.findAdminByAccessToken(cookieAccessToken);
             session.setAttribute("user", AdminCheckerDto.builder().intraId(user.getIntraId()).roleType(user.getRoleType()).build());
         }
         if (user.getRoleType() != RoleType.ADMIN)
