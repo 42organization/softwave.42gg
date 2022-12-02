@@ -57,7 +57,7 @@ class OpponentControllerImplTest {
                 .build());
         token = tokenRepository.save(new Token(user, "1", "1"));
         for (int i = 0; i < 12; i++) {
-            opponentRepository.save(new Opponent("id" + i, "nick" + i, "", "hihi", i % 3 != 0));
+            opponentRepository.save(new Opponent("id" + i, "nick" + i, "", "hihi1", "hihi2", "hihi3", i % 3 != 0));
         }
     }
 
