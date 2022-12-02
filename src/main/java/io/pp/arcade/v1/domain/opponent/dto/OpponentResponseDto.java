@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 public class OpponentResponseDto {
@@ -12,19 +15,19 @@ public class OpponentResponseDto {
     private String intraId;
     private String nick;
     private String imageUrl;
-    private String detail1;
-    private String detail2;
-    private String detail3;
+    private List<String> detail;
     private Boolean isReady;
 
     @Builder
     public OpponentResponseDto(Opponent opponent) {
+        List<String> detail = new ArrayList<>();
+        detail.add(opponent.getDetail1());
+        detail.add(opponent.getDetail2());
+        detail.add(opponent.getDetail3());
         this.intraId = opponent.getIntraId();
         this.nick = opponent.getNick();
         this.imageUrl = opponent.getImageUrl();
-        this.detail1 = opponent.getDetail1();
-        this.detail2 = opponent.getDetail2();
-        this.detail3 = opponent.getDetail3();
+        this.detail = detail;
         this.isReady = opponent.getIsReady();
     }
 
@@ -34,9 +37,7 @@ public class OpponentResponseDto {
                 "intraId='" + intraId + '\'' +
                 ", nick='" + nick + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
-                ", detail1='" + detail1 + '\'' +
-                ", detail2='" + detail2 + '\'' +
-                ", detail3='" + detail3 + '\'' +
+                ", detail1='" + detail + '\'' +
                 ", isReady=" + isReady +
                 '}';
     }

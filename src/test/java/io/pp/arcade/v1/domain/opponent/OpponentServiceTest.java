@@ -29,7 +29,7 @@ class OpponentServiceTest {
         assertThat(responseDto).isEqualTo(OpponentResponseDto.from(opponent1));
         assertThat(responseDto.getIntraId()).isEqualTo(opponent1.getIntraId());
         assertThat(responseDto.getNick()).isEqualTo(opponent1.getNick());
-        assertThat(responseDto.getDetail1()).isEqualTo(opponent1.getDetail1());
+        assertThat(responseDto.getDetail().get(0)).isEqualTo(opponent1.getDetail1());
     }
 
     @Test
