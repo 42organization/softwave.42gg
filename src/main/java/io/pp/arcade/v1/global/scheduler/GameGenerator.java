@@ -11,6 +11,7 @@ import io.pp.arcade.v1.domain.noti.dto.NotiCanceledTypeDto;
 import io.pp.arcade.v1.domain.slot.SlotService;
 import io.pp.arcade.v1.domain.slot.dto.SlotDto;
 import io.pp.arcade.v1.domain.user.dto.UserDto;
+import io.pp.arcade.v1.global.exception.BusinessException;
 import io.pp.arcade.v1.global.type.GameType;
 import io.pp.arcade.v1.global.type.NotiType;
 import io.pp.arcade.v1.global.type.StatusType;
@@ -35,30 +36,11 @@ public class GameGenerator /* extends AbstractScheduler */{
         this.slotService = slotService;
         this.currentMatchService = currentMatchService;
         this.notiGenerater = notiGenerater;
-//        this.setCron("0 */15 * * * *");
-//        this.setInterval(15);
-    }
-
-//    public void gameGenerator() throws MessagingException {
-//        LocalDateTime now = LocalDateTime.now();
-//        now = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), 0);
-//        SlotDto slotDto = slotService.findByTime(now);
-//
-//        if (slotDto != null) {
-//            addGameOrNotiCanceled(slotDto);
-//        }
-//    }
-
-    public void gameGenerator(LocalDateTime time) {
-        SlotDto slotDto = slotService.findByTime(time);
-
-        if (slotDto != null) {
-            addGameOrNotiCanceled(slotDto);
-        }
     }
 
     public void gameGenerator(Integer slotId) {
         SlotDto slotDto = slotService.findSlotById(slotId);
+        checkIfGameExist(slotDto);
         List<GameDto> beforeGames = gameService.findGameByStatusType(StatusType.LIVE);
         for (GameDto beforeGame : beforeGames) {
             GameModifyStatusDto modifyStatusDto = GameModifyStatusDto.builder()
@@ -67,17 +49,9 @@ public class GameGenerator /* extends AbstractScheduler */{
                     .build();
             gameService.modifyGameStatus(modifyStatusDto);
         }
-        if (slotDto != null) {
-            addGameOrNotiCanceled(slotDto);
-        }
-    }
-
-    private void addGameOrNotiCanceled(SlotDto slotDto) {
-        if (slotDto.getHeadCount().equals(getMaxHeadCount(slotDto.getType()))) {
+        if (slotDto != null && slotDto.getHeadCount().equals(getMaxHeadCount(slotDto.getType()))) {
             addGame(slotDto);
-        } //else {
-//            notiCanceled(slotDto);
-//        }
+        }
     }
 
     private Integer getMaxHeadCount(GameType type) {
@@ -86,16 +60,6 @@ public class GameGenerator /* extends AbstractScheduler */{
             maxHeadCount = 4;
         }
         return maxHeadCount;
-    }
-
-    private void notiCanceled(SlotDto slotDto) {
-        NotiCanceledTypeDto canceledDto = NotiCanceledTypeDto.builder().slotDto(slotDto).notiType(NotiType.CANCELEDBYTIME).build();
-        notiGenerater.addCancelNotisBySlot(canceledDto);
-
-        CurrentMatchRemoveDto removeDto = CurrentMatchRemoveDto.builder()
-                .slot(slotDto)
-                .build();
-        currentMatchService.removeCurrentMatch(removeDto);
     }
 
     private void addGame(SlotDto slotDto) {
@@ -111,15 +75,10 @@ public class GameGenerator /* extends AbstractScheduler */{
         currentMatchService.saveGameInCurrentMatch(matchSaveGameDto);
     }
 
-//    public void gameLiveToWait() {
-//        LocalDateTime now = LocalDateTime.now();
-//        now = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), 0).minusMinutes(interval);
-//        SlotDto slot = slotService.findByTime(now);
-//        if (slot != null) {
-//            GameDto game = gameService.findBySlotIdNullable(slot.getId());
-//            if (game != null && game.getStatus().equals(StatusType.LIVE)) {
-//                gameService.modifyGameStatus(GameModifyStatusDto.builder().game(game).status(StatusType.WAIT).build());
-//            }
-//        }
-//    }
+    private void checkIfGameExist(SlotDto slotDto) {
+        GameDto game = gameService.findBySlot(slotDto.getId());
+        if (game != null) {
+            throw new BusinessException("E0001");
+        }
+    }
 }

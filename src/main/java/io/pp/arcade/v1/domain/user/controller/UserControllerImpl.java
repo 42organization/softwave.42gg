@@ -221,17 +221,6 @@ public class UserControllerImpl implements UserController {
         return userLiveInfoResponse;
     }
 
-    private void doubleCheckForSchedulers(CurrentMatchDto currentMatch) throws MessagingException {
-        if (schedulersNoProblem(currentMatch)) {
-            return ;
-        }
-        if (currentMatch.getMatchImminent() == false) {
-            checkForCurrentMatchUpdater(currentMatch);
-        } else {
-            checkForGameGenerator(currentMatch);
-        }
-    }
-
     private boolean schedulersNoProblem(CurrentMatchDto currentMatch) {
         if (currentMatch == null) {
             return true;
@@ -240,18 +229,6 @@ public class UserControllerImpl implements UserController {
             return true;
         }
         return false;
-    }
-
-    private void checkForGameGenerator(CurrentMatchDto currentMatch) throws MessagingException {
-        if (currentMatch.getGame() == null && LocalDateTime.now().isAfter(currentMatch.getSlot().getTime())) {
-            gameGenerator.gameGenerator(currentMatch.getSlot().getTime());
-        }
-    }
-
-    private void checkForCurrentMatchUpdater(CurrentMatchDto currentMatch) throws MessagingException {
-        if (currentMatch.getGame() == null && LocalDateTime.now().isAfter(currentMatch.getSlot().getTime().minusMinutes(5))) {
-            currentMatchUpdater.updateIsImminent(currentMatch.getSlot().getTime());
-        }
     }
 
     private UserRivalRecordDto getRivalRecord(UserDto curUser, UserDto targetUser) {
