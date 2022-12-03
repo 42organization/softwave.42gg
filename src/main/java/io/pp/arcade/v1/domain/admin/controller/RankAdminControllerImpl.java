@@ -1,6 +1,6 @@
 package io.pp.arcade.v1.domain.admin.controller;
 
-import io.pp.arcade.v1.domain.admin.service.AdminRankRedisService;
+import io.pp.arcade.v1.domain.admin.service.AdminRankService;
 import io.pp.arcade.v1.domain.rank.dto.RankDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping(value = "/admin")
 public class RankAdminControllerImpl implements RankAdminController {
-    private final AdminRankRedisService rankRedisService;
+    private final AdminRankService rankRedisService;
 
     /* 봉인
     @Override
