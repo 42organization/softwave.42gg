@@ -2,7 +2,8 @@ package io.pp.arcade.v1.domain.admin.controller;
 
 import io.pp.arcade.v1.domain.admin.dto.create.SeasonCreateRequestDto;
 import io.pp.arcade.v1.domain.admin.dto.update.SeasonUpdateDto;
-import io.pp.arcade.v1.domain.admin.service.AdminRankRedisService;
+import io.pp.arcade.v1.domain.admin.service.AdminRankService;
+import io.pp.arcade.v1.domain.rank.service.RankService;
 import io.pp.arcade.v1.domain.season.SeasonService;
 import io.pp.arcade.v1.domain.season.dto.SeasonCreateDto;
 import io.pp.arcade.v1.domain.season.dto.SeasonDeleteDto;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class SeasonAdminControllerImpl implements SeasonAdminController {
     private final SeasonService seasonService;
-    private final AdminRankRedisService rankRedisService;
+    private final AdminRankService rankService;
     @Override
     @PostMapping(value = "/season")
     public void seasonCreate(SeasonCreateRequestDto createRequestDto, HttpServletRequest request) {
@@ -32,7 +33,7 @@ public class SeasonAdminControllerImpl implements SeasonAdminController {
         seasonService.createSeasonByAdmin(createDto);
         if (createRequestDto.getSeasonMode() != Mode.NORMAL) {
             SeasonDto seasonDto = seasonService.findLatestRankSeason();
-            rankRedisService.addAllUserRankByNewSeason(seasonDto, createRequestDto.getStartPpp());
+            rankService.addAllUserRankByNewSeason(seasonDto, createRequestDto.getStartPpp());
         }
     }
 
