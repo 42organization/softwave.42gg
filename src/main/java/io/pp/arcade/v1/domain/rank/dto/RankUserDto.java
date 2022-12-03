@@ -3,6 +3,7 @@ package io.pp.arcade.v1.domain.rank.dto;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.pp.arcade.v1.domain.rank.entity.Rank;
 import io.pp.arcade.v1.domain.rank.entity.RankRedis;
+import io.pp.arcade.v1.domain.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -68,6 +69,18 @@ public class RankUserDto {
                 .statusMessage(rank.getUser().getStatusMessage())
                 .build();
         return dto;
+    }
+
+    public static RankUserDto createDummy(UserDto user) {
+        return RankUserDto.builder()
+                .intraId(user.getIntraId())
+                .rank(-1)
+                .wins(0)
+                .losses(0)
+                .ppp(0)
+                .statusMessage(user.getStatusMessage())
+                .winRate(0.0)
+                .build();
     }
 
     @Override

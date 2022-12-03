@@ -167,7 +167,7 @@ public class RankService {
         Integer count = rankFindListDto.getCount() == null ? pageable.getPageSize() : rankFindListDto.getCount();
         Integer pageNum = pageable.getPageNumber() < 1 ? 0 : pageable.getPageNumber() - 1;
 
-        pageable = PageRequest.of(pageNum, count);
+        pageable = PageRequest.of(pageNum, count, Sort.by("id").ascending());
         Page<Rank> pageRanks = rankRepository.findAllBySeasonIdOrderByPppDesc(rankFindListDto.getSeasonDto().getId(), pageable);
         List<Rank> ranks = pageRanks.getContent();
         Integer index = pageable.getPageSize() * pageable.getPageNumber();
@@ -231,7 +231,10 @@ public class RankService {
         Integer userId = findDto.getUser().getId();
         String intraId = findDto.getUser().getIntraId();
 
-        Rank userRank = rankRepository.findBySeasonIdAndUserId(seasonId, userId).orElseThrow(() -> new BusinessException("E0001"));
+        Rank userRank = rankRepository.findBySeasonIdAndUserId(seasonId, userId).orElse(null);
+        if (userRank == null) {
+            return RankUserDto.createDummy(findDto.getUser());
+        }
         Integer ranking = rankRepository.findRankingBySeasonIdAndIntraId(seasonId, intraId);
         Integer seasonStartPpp = findDto.getSeasonDto().getStartPpp();
 
