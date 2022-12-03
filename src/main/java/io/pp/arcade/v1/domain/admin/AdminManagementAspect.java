@@ -30,7 +30,11 @@ public class AdminManagementAspect {
     public void managedAdminController() {
     }
 
-    @Around("managedAdminController()")
+    @Pointcut("execution(* io.pp.arcade.v1.domain.admin.management..*(..))")
+    public void adminManagementController() {
+    }
+
+    @Around("managedAdminController() && adminManagementController()")
     public Object checkAdmin(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
