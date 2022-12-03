@@ -1,4 +1,4 @@
-package io.pp.arcade.v1.domain.admin.management;
+package io.pp.arcade.v1.domain.admin.guest;
 
 import io.pp.arcade.v1.domain.admin.controller.GuestGameGeneratorAdminController;
 import io.pp.arcade.v1.domain.admin.dto.GameAddRequestDto;
