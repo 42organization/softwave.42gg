@@ -53,7 +53,6 @@ public class AdminCheckerAspect {
             findAdminByAccessToken에서 관리자가 아닌 경우 메인 페이지로 리다이렉트*/
             user = tokenService.findUserByAccessToken(accessToken);
             session.setAttribute("user", AdminCheckerDto.builder().intraId(user.getIntraId()).roleType(user.getRoleType()).build());
-            redirect(response);
         } else {
             String cookieAccessToken = CookieUtil.getCookie(request, "access_token")
                     .map(Cookie::getValue)
