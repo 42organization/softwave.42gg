@@ -116,7 +116,7 @@ public class SlotService {
     public List<SlotStatusDto> findSlotsStatus(SlotFindStatusDto findDto) {
         LocalDateTime now = findDto.getCurrentTime();
         LocalDateTime todayStartTime = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0, 0);
-        List<Slot> slots = slotRepository.findAllByIdAsc();
+        List<Slot> slots = slotRepository.findAllByTimeAfterOrderByIdAsc(todayStartTime);
 
         User user = userRepository.findById(findDto.getUserId()).orElseThrow(() -> new BusinessException("E0001"));
         Season season = seasonRepository.findSeasonByStartTimeIsBeforeAndEndTimeIsAfter(LocalDateTime.now(), LocalDateTime.now()).orElse(null);
