@@ -30,15 +30,11 @@ public class AdminCheckerAspect {
     private final TokenService tokenService;
     private final ApplicationYmlRead applicationYmlRead;
 
-    @Pointcut("execution(* io.pp.arcade.v1.domain.admin.controller..*(..))")
-    public void managedAdminController() {
+    @Pointcut("execution(* io.pp.arcade.v1.domain.admin.guest..*(..))")
+    public void guestAdminController() {
     }
 
-    @Pointcut("execution(* io.pp.arcade.v1.domain.admin.management..*(..))")
-    public void adminManagementController() {
-    }
-
-
+    @Around("guestAdminController()")
     public Object checkAdmin(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
