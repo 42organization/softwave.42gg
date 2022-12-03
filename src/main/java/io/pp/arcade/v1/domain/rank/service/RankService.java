@@ -49,7 +49,7 @@ public class RankService {
 
     @Transactional
     public Integer findRankingById(RankRankingFindDto findDto) {
-        Integer myRank = rankRepository.findRankingByIntraId(findDto.getIntraId());
+        Integer myRank = rankRepository.findRankingBySeasonIdAndIntraId(findDto.getSeasonDto().getId(), findDto.getIntraId());
         return myRank;
     }
 
@@ -168,7 +168,7 @@ public class RankService {
         Integer pageNum = pageable.getPageNumber() < 1 ? 0 : pageable.getPageNumber() - 1;
 
         pageable = PageRequest.of(pageNum, count);
-        Page<Rank> pageRanks = rankRepository.findAllByOrderByPppDesc(pageable);
+        Page<Rank> pageRanks = rankRepository.findAllBySeasonIdOrderByPppDesc(rankFindListDto.getSeasonDto().getId(), pageable);
         List<Rank> ranks = pageRanks.getContent();
         Integer index = pageable.getPageSize() * pageable.getPageNumber();
         List<RankUserDto> rankUserDtos = new ArrayList<>();
@@ -232,7 +232,7 @@ public class RankService {
         String intraId = findDto.getUser().getIntraId();
 
         Rank userRank = rankRepository.findBySeasonIdAndUserId(seasonId, userId).orElseThrow(() -> new BusinessException("E0001"));
-        Integer ranking = rankRepository.findRankingByIntraId(intraId);
+        Integer ranking = rankRepository.findRankingBySeasonIdAndIntraId(seasonId, intraId);
         Integer seasonStartPpp = findDto.getSeasonDto().getStartPpp();
 
         return RankUserDto.from(userRank, ranking, seasonStartPpp);

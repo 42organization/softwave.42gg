@@ -20,27 +20,24 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AdminRankRedisService {
+public class AdminRankService {
     private final UserRepository userRepository;
     private final RedisKeyManager redisKeyManager;
     private final RankRepository rankRepository;
     @Transactional
     public void addAllUserRankByNewSeason(SeasonDto seasonDto, Integer startPpp) {
         List<User> users = userRepository.findAll();
-        RankKeyGetDto rankKeyGetDto = RankKeyGetDto.builder().seasonId(seasonDto.getId()).seasonName(seasonDto.getSeasonName()).build();
-        String curRankKey = redisKeyManager.getRankKeyBySeason(rankKeyGetDto);
-        String curRankingKey = redisKeyManager.getRankingKeyBySeason(rankKeyGetDto, GameType.SINGLE);
-
         List<Rank> ranks = new ArrayList<>();
         users.forEach(user -> {
             UserDto userDto = UserDto.from(user);
             Rank userRank = Rank.builder()
+                    .user(user)
                     .ranking(0)
                     .racketType(userDto.getRacketType())
                     .seasonId(seasonDto.getId())
                     .wins(0)
                     .losses(0)
-                    .ppp(startPpp)
+                    .ppp(0)
                     .gameType(GameType.SINGLE)
                     .statusMessage(userDto.getStatusMessage())
                     .build();
