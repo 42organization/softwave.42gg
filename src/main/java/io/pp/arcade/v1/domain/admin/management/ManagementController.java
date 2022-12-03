@@ -191,8 +191,9 @@ public class ManagementController {
         return "feedback_list_by_category";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/main")
     public String mainPage(HttpServletRequest request) {
         return "layout/admin";
     }
+
 }
