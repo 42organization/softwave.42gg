@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState, liveState } from 'utils/recoil/layout';
 import {
   reloadMatchState,
@@ -11,6 +11,7 @@ import {
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
+import { pageState } from 'utils/recoil/myRank';
 import instance from 'utils/axios';
 import Header from './Header';
 import Footer from './Footer';
@@ -28,12 +29,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
     openCurrentMatchState
   );
   const [reloadMatch, setReloadMatch] = useRecoilState(reloadMatchState);
+  const page = useRecoilValue(pageState);
   const setSeasonList = useSetRecoilState(seasonListState);
   const setCurrentMatch = useSetRecoilState(currentMatchState);
   const setError = useSetRecoilState(errorState);
   const setModal = useSetRecoilState(modalState);
   const presentPath = useRouter().asPath;
-  const scroll = useRef<HTMLInputElement>(null);
+  const topScroll = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getUserHandler();
@@ -51,13 +53,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   useEffect(() => {
     setModal({ modalName: null });
-  }, [presentPath]);
+    topScroll.current?.scrollIntoView(true);
+  }, [presentPath, page]);
 
   useEffect(() => {
     if (user.intraId) {
       getLiveHandler();
       if (reloadMatch) setReloadMatch(false);
-      scroll.current?.scrollIntoView(false);
     }
   }, [presentPath, user, reloadMatch]);
 
@@ -118,7 +120,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           </div>
         )}
         <div className={styles.pageContent}>
-          <div ref={scroll}>
+          <div ref={topScroll}>
             {openCurrentMatch && <div className={styles.blank}></div>}
             {children}
           </div>
