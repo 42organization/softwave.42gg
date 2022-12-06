@@ -1,4 +1,4 @@
-🌈Welcome to the 42GG!🌈
+<div align=center><img src="https://capsule-render.vercel.app/api?type=slice&text=%2042GG%20&desc=%20Innovation%20Academy&fontSize=36&height=130&fontAlign=82&descAlign=81&fontAlignY=17&descAlignY=37&rotate=8&descrotate=8&animation=fadeIn&color=gradient&customColorList=9" width=2000></div><br><br>
 
 # 😊 팀소개
 
