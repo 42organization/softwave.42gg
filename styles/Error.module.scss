@@ -31,13 +31,14 @@
 }
 
 .img404 {
-  width: 15rem;
-  height: 15rem;
+  width: 208px;
+  height: 208px;
   margin: 1.5rem;
   border: black solid 1px;
+  padding: 0;
   border-radius: $small-radius;
   background-image: url('../public/image/image_404.png');
-  background-size: cover;
+  background-size: 208px 208px;
 }
 
 .error {
