@@ -1,0 +1,66 @@
+@import './common.scss';
+
+.container {
+  @include pageWrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  width: 100vw;
+  max-width: 25rem;
+  height: 100vh;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto 0;
+  border-radius: $small-radius;
+  background: white;
+  color: black;
+}
+
+.title {
+  margin: 1rem 0.5rem 0;
+  color: black;
+  font-size: 3rem;
+  font-family: $logo-font;
+  letter-spacing: 0.2rem;
+}
+
+.img404 {
+  width: 208px;
+  height: 208px;
+  margin: 1.5rem;
+  border: black solid 1px;
+  padding: 0;
+  border-radius: $small-radius;
+  background-image: url('../public/image/image_404.png');
+  background-size: 208px 208px;
+}
+
+.error {
+  margin: 1.2rem 0;
+  color: black;
+  font-size: $big-font;
+  .errorCode {
+    margin: 0.5rem 0 0;
+    color: black;
+    font-size: $medium-font;
+    text-align: center;
+  }
+}
+
+.home {
+  @include select-buttons(10rem, 3.5rem);
+  margin: 1.5rem 0 2rem;
+  .positive {
+    input {
+      font-size: $big-font;
+      font-weight: 500;
+      box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@import '../common.scss';
+
+.mainContainer {
+  font-size: 0.9rem;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.9rem;
+  border-radius: $big-radius;
+  color: white;
+  font-size: 1.8rem;
+  font-family: $title-font;
+  text-shadow: $text-border-black;
+  letter-spacing: 0.1rem;
+  background: $rank-red;
+  &.normal {
+    background: $norm-lightblue2;
+  }
+}
+
+.mainData {
+  display: grid;
+  grid-template-columns: 1.1fr 2.4fr 4fr;
+  align-items: center;
+  height: 2.9rem;
+  margin-top: 0.2rem;
+  border-radius: $big-radius;
+  background: $rank-pink;
+  &.normal {
+    background: $norm-emerald;
+  }
+}
+
+.rankNumber {
+  margin-left: 1rem;
+  color: $rank-red;
+  font-weight: 700;
+  text-align: center;
+}
+
+.intraId {
+  color: black;
+  font-weight: 700;
+  text-align: left;
+  word-break: keep-all;
+  span {
+    cursor: pointer;
+  }
+}
+
+.statusMessage {
+  color: $dark-blue;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: left;
+}

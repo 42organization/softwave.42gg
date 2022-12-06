@@ -1,0 +1,37 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+  color: black;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  .title {
+    margin-bottom: 1.7rem;
+    color: white;
+    font-family: $title-font;
+    font-size: 2rem;
+    text-shadow: $text-border-black;
+  }
+  .user {
+    margin-bottom: 0.5rem;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-shadow: $text-shadow-blue;
+  }
+  .rose {
+    margin-top: 1rem;
+    color: $pp-red;
+    span:last-child {
+      color: green;
+    }
+  }
+}
+
+.buttons {
+  @include select-buttons(7rem);
+}

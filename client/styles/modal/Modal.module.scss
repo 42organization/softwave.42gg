@@ -1,0 +1,22 @@
+@import 'styles/common.scss';
+
+.backdrop {
+  @include backdrop;
+  z-index: 3 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  margin: 1rem;
+  border-radius: $small-radius;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  color: white;
+  font-size: $medium-font;
+}

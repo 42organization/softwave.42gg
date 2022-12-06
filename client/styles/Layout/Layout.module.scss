@@ -1,0 +1,59 @@
+@import 'styles/common.scss';
+
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  background: black;
+}
+
+.background {
+  position: relative;
+  width: 100vw;
+  max-width: 100vh;
+  height: 100vh;
+  max-height: -webkit-fill-available;
+  background-image: url('../../public/image/background_img.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 4rem);
+  max-height: -webkit-fill-available;
+  overflow-y: scroll;
+  .blank {
+    height: 3.3rem;
+  }
+}
+
+.buttonContainer {
+  z-index: 2;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 83%;
+  margin-left: 75%;
+  &.trigger {
+    top: 70%;
+  }
+}
+
+.fixedButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  font-size: 2.3rem;
+  box-shadow: 3px 3px 10px black;
+  cursor: pointer;
+}

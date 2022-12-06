@@ -1,0 +1,16 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+  div:nth-child(2) {
+    font-weight: 700;
+  }
+}
+
+.buttons {
+  @include select-buttons(6rem);
+}

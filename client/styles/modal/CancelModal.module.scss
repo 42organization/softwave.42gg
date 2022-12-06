@@ -1,0 +1,14 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+  white-space: pre-wrap;
+}
+
+.buttons {
+  @include select-buttons(6rem);
+}

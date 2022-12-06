@@ -1,0 +1,65 @@
+@import 'styles/common.scss';
+
+.searchBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 2.5rem;
+  margin: 1rem 0.8rem 0;
+  padding: 0 0.8rem;
+  border-radius: $small-radius;
+  background: white;
+  font-size: $medium-font;
+  input {
+    all: unset;
+    width: calc(100% - 4rem);
+  }
+  .icons {
+    span {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+    }
+    .reset {
+      color: gray;
+      cursor: pointer;
+    }
+  }
+  .dropdown {
+    display: block;
+    position: absolute;
+    top: 2.1rem;
+    left: 0;
+    width: 100%;
+    padding: 0 0.8rem 0.5rem 0.8rem;
+    border-radius: 0 0 $small-radius $small-radius;
+    background: white;
+    div {
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+  }
+}
+
+#game {
+  z-index: 1;
+  height: 1.6rem;
+  margin: 0;
+  padding: 0 0.5rem;
+  font-size: $small-font;
+  border-radius: $mini-radius;
+  input {
+    width: calc(100% - 1.5rem);
+  }
+  .icons {
+    span {
+      font-size: 0.9rem;
+    }
+  }
+  .dropdown {
+    top: 1.33rem;
+    padding: 0 0.5rem 0.2rem 0.5rem;
+    border-radius: 0 0 $mini-radius $mini-radius;
+  }
+}

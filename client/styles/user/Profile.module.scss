@@ -1,0 +1,223 @@
+@import 'styles/common.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem;
+  margin-bottom: 0.6rem;
+  border-radius: $small-radius;
+  background: $g2-bottom;
+  color: black;
+}
+
+.topContainer {
+  display: flex;
+}
+
+.bottomContainer {
+  margin-top: 1rem;
+}
+
+.levelRacketWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+  .level {
+    margin: 0 0 0.2rem 0.2rem;
+    color: $pp-blue;
+    font-size: $giant-font;
+    font-weight: 700;
+  }
+  .exp {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    .expRate {
+      margin: 0 0 0.2rem 0.2rem;
+      font-size: $small-font;
+    }
+    .bar {
+      display: flex;
+      width: 6.5rem;
+      height: 0.5rem;
+      border-radius: $mini-radius;
+      overflow: hidden;
+      .expCurrent {
+        background: $g2-top;
+      }
+      .expLeft {
+        background: $dark-gray;
+      }
+    }
+  }
+  .racket {
+    width: 6.5rem;
+    padding: 0.2rem 0;
+    margin-right: auto;
+    border-radius: $mini-radius;
+    background: white;
+    font-size: $small-font;
+    text-align: center;
+  }
+}
+
+.rankInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  margin: -1.8rem 0 0.7rem 0;
+}
+
+.rank {
+  display: flex;
+  align-items: flex-end;
+  line-height: 100%;
+  margin-bottom: 0.3rem;
+  color: $rank-red;
+  font-size: 2rem;
+  font-weight: 700;
+  span:nth-child(1) {
+    margin-right: 0.2rem;
+    font-size: 1.5rem;
+  }
+  span:nth-child(2) {
+    padding-bottom: 0.15rem;
+  }
+}
+
+.pppWinRateWrap {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.3rem;
+  height: 1.7rem;
+  .ppp {
+    font-size: $big-font;
+  }
+  .winRate {
+    margin-left: auto;
+    font-size: $small-font;
+    font-weight: 400;
+  }
+}
+
+.bar {
+  display: flex;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: $mini-radius;
+  overflow: hidden;
+  .wins {
+    background: $winner-blue;
+  }
+  .losses {
+    background: $loser-red;
+  }
+}
+
+.statusMessage {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 5rem;
+  padding: 0.5rem;
+  border-radius: $mini-radius;
+  background: white;
+  font-size: $medium-font;
+  .buttons {
+    @include select-buttons(4.5rem, 1.5rem);
+    margin-left: auto;
+    margin-top: 0.2rem;
+  }
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 2rem 1.5rem;
+}
+
+.editModalTitle {
+  color: $pp-blue;
+}
+
+.phrase {
+  @include modal-phrase;
+}
+
+.editType {
+  margin: 0 0 0.3rem 0.5rem;
+  color: $pp-blue;
+  font-size: $medium-font;
+}
+
+.racketTypeWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  .racketRadioButtons {
+    display: flex;
+    justify-content: space-between;
+    input[type='radio'] {
+      position: absolute;
+      opacity: 0;
+    }
+    :checked + .radioButton {
+      border: solid 1px $pp-blue;
+      color: $pp-blue;
+    }
+    .radioButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 6rem;
+      height: 2rem;
+      border: 1px solid white;
+      border-radius: $mini-radius;
+      font-size: $small-font;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}
+
+.statusMessageWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  .textareaWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid $pp-blue;
+    border-radius: $small-radius;
+    background: white;
+    overflow: hidden;
+    textarea {
+      resize: none;
+      height: 5rem;
+      padding: 0.8rem;
+      border: none;
+      font-size: $big-font;
+    }
+    :focus {
+      outline: none;
+    }
+    div {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.7rem;
+      color: $dark-gray;
+      font-size: $small-font;
+    }
+  }
+}
+
+.buttons {
+  @include select-buttons(9rem);
+}

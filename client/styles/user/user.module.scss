@@ -1,0 +1,24 @@
+@import '../common.scss';
+
+.container {
+  @include pageWrap;
+}
+
+.title {
+  @include pageTitle;
+  font-size: $giant-big-font;
+  word-break: keep-all;
+}
+
+.subtitle {
+  width: fit-content;
+  margin: 1rem auto 0.5rem auto;
+  color: white;
+  font-family: $title-font;
+  font-size: $giant-font;
+  letter-spacing: 0.1rem;
+}
+
+#mine {
+  cursor: pointer;
+}

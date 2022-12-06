@@ -1,0 +1,16 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+  padding: 0 0.5rem;
+}
+
+.phrase {
+  @include modal-phrase;
+  font-size: $medium-font;
+  white-space: pre-wrap;
+}
+
+.buttons {
+  @include select-buttons;
+}

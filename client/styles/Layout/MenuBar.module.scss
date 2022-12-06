@@ -1,0 +1,59 @@
+@import 'styles/common.scss';
+
+.backdrop {
+  @include backdrop;
+  z-index: 3;
+}
+
+.container {
+  @include menu-noti-Bar;
+  padding: 1.15rem 0.7rem;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  color: white;
+  text-shadow: 2px 2px 2px $dark-gray;
+  button {
+    all: unset;
+    width: 1.5rem;
+    margin-left: auto;
+    color: $dark-gray;
+    font-size: 1.5rem;
+    text-shadow: none;
+    text-align: center;
+    cursor: pointer;
+  }
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 2rem 1rem;
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+    font-size: $big-giant-font;
+    font-weight: 600;
+    div {
+      margin-bottom: 1.7rem;
+      cursor: pointer;
+    }
+  }
+  .subMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2rem;
+    font-size: $medium-font;
+    font-weight: normal;
+    div {
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+    }
+  }
+}
+
+#logout {
+  margin-top: 0;
+}

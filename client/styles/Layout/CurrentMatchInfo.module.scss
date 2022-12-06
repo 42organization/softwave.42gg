@@ -1,0 +1,92 @@
+@import 'styles/common.scss';
+
+.container {
+  z-index: 2;
+  position: absolute;
+  top: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 4.2rem;
+  padding: 0 1rem;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.stringWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.waitUpDown {
+  span {
+    display: inline-block;
+    position: relative;
+  }
+}
+
+.span1 {
+  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  margin-left: 0.2rem;
+  animation-delay: 0.3s;
+}
+
+.span2 {
+  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  animation-delay: 0.5s;
+}
+
+.span3 {
+  @include spanUpDownAnimation(1.5rem, 0.1rem);
+  animation-delay: 0.7s;
+}
+
+.messageWrapper {
+  // color: white;
+  // text-shadow: 2px 2px 2px rgb(70, 70, 70);
+  color: black;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+}
+
+.cancelButton {
+  input {
+    @include button($btn-blue, white, 4rem, 2rem);
+    font-size: $small-font;
+  }
+  :hover {
+    background: linear-gradient(to bottom, $dark-blue, $btn-blue);
+  }
+}
+
+.blockCancelButton {
+  input {
+    @include button($medium-gray, white, 4rem, 2rem);
+    background: linear-gradient(to bottom, $medium-gray, $dark-gray);
+    font-size: $small-font;
+  }
+  :hover {
+    background: linear-gradient(to bottom, $dark-gray, $medium-gray);
+  }
+}
+
+.message {
+  margin-bottom: 0.1rem;
+}
+
+.enemyTeam {
+  font-size: 0.85rem;
+}
+
+#enemyUsers {
+  font-weight: 600;
+  color: $pp-blue;
+  // text-shadow: 0.1rem 0.1rem 0.1rem $pp-blue;
+  cursor: pointer;
+}

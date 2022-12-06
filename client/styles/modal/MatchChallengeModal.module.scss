@@ -1,0 +1,72 @@
+@import 'styles/common.scss';
+
+.container {
+  @include modal-container;
+}
+
+.phrase {
+  @include modal-phrase;
+  margin-bottom: 0;
+  font-size: $medium-font;
+  .title {
+    margin-bottom: 0.8rem;
+    color: white;
+    font-size: $big-giant-font;
+    font-family: $title-font;
+    font-weight: 700;
+    text-shadow: $text-border-black;
+    letter-spacing: 0.1rem;
+  }
+  .subContent {
+    margin-top: 0rem;
+    text-align: center;
+    .reloadButton {
+      @include reload-button;
+      margin-left: 0.5rem;
+    }
+    .spinReloadButton {
+      @include reload-button;
+      margin-left: 0.5rem;
+      opacity: 0.7;
+      animation: spin 1s infinite;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.cardWrap {
+  margin-bottom: 1rem;
+}
+
+.reloadWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  span {
+    margin-right: 1rem;
+    font-size: $medium-font;
+    text-align: center;
+  }
+  .reloadButton {
+    @include reload-button;
+  }
+  .spinReloadButton {
+    @include reload-button;
+    opacity: 0.7;
+    animation: spin 1s infinite;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+.buttons {
+  @include select-buttons;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

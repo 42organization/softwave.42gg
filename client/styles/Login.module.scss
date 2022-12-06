@@ -1,0 +1,34 @@
+@import 'styles/common.scss';
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-height: -webkit-fill-available;
+  .innerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50vh;
+    padding-bottom: 5rem;
+  }
+
+  .title {
+    @include logoTitle(0.4rem);
+    font-size: 5rem;
+  }
+
+  .buttons {
+    @include select-buttons(13rem, 3.5rem);
+    .positive {
+      input {
+        font-size: $big-font;
+        font-weight: 500;
+        box-shadow: 0.1rem 0.1rem 0.3rem $pp-blue;
+      }
+    }
+  }
+}

@@ -1,0 +1,216 @@
+/* font-size */
+$giant-giant-font: 2.4rem;
+$giant-big-font: 2.1rem;
+$big-giant-font: 1.8rem;
+$giant-font: 1.5rem;
+$big-font: 1.2rem;
+$medium-font: 1rem;
+$small-font: 0.8rem;
+
+/* radius */
+$mini-radius: 0.3rem;
+$small-radius: 0.5rem;
+$medium-radius: 0.6rem;
+$big-radius: 5rem;
+
+/* color */
+$pp-red: #de1825;
+$pp-pink: #ffc5c8;
+$pp-blue: #471df0;
+
+$rank-red: #de1825;
+$rank-pink: #ffc5c8;
+$rank-blue: #471df0;
+
+$norm-hotpink: #dc3789;
+$norm-lightblue: #5acfe8;
+$norm-lightblue2: #1ea1c8;
+$norm-emerald: #cef1d0;
+
+$light-gray: #f0f0f0;
+$gray: #dadada;
+$medium-gray: #cccccc;
+$dark-gray: #676767;
+
+$btn-blue: #2d80ed;
+$dark-blue: #24098f;
+
+$g1-top: #8dbbf9;
+$g1-bottom: #f0b5f2;
+$g2-top: #c4fff8;
+$g2-bottom: #b5bbf2;
+
+$loser-red: #ff0303;
+$winner-blue: #040eff;
+
+/* font */
+$logo-font: 'Agonostic Italic', cursive;
+$title-font: 'Reality Hyper Regular', cursive;
+$text-border-black: 0.1rem 0 black, 0 0.1rem black, -0.1rem 0 black,
+  0 -0.1rem black;
+$text-shadow-blue: 0.1rem 0.1rem 0.1rem $pp-blue;
+
+@mixin menu-noti-Bar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 16rem;
+  height: 100vh;
+  overflow: auto;
+}
+
+@mixin match-noti-button {
+  all: unset;
+  padding: 0.2rem 0.5rem;
+  margin: 0.7rem 0;
+  background: linear-gradient(to bottom, white, $gray);
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(to bottom, $gray, white);
+    color: $dark-gray;
+  }
+}
+
+@mixin reload-button {
+  all: unset;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  color: black;
+  background: linear-gradient(to bottom, white, $gray);
+  text-align: center;
+  font-size: $medium-font;
+  cursor: pointer;
+  &:hover {
+    color: $dark-gray;
+    background: linear-gradient(to bottom, $gray, white);
+  }
+}
+
+@mixin pageWrap {
+  max-width: 30rem;
+  padding: 2rem 1.5rem;
+  margin: 0 auto;
+}
+
+@mixin logoTitle($shadow) {
+  color: white;
+  font-family: $logo-font;
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+}
+
+@mixin pageTitle {
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 2.8rem;
+  font-family: $title-font;
+  text-align: center;
+  text-shadow: $text-border-black, 0.3rem 0.3rem 0 $pp-red;
+  letter-spacing: 0.1rem;
+}
+
+@mixin backdrop {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  max-height: -webkit-fill-available;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@mixin button($btn-color, $txt-color, $width: 8rem, $height: 2.8rem) {
+  all: unset;
+  width: $width;
+  height: $height;
+  border-radius: $small-radius;
+  background: if(
+    $btn-color == white,
+    linear-gradient(to bottom, $btn-color, $medium-gray),
+    linear-gradient(to bottom, $btn-color, $dark-blue)
+  );
+  color: $txt-color;
+  font-size: $medium-font;
+  text-align: center;
+  cursor: pointer;
+}
+
+@mixin select-buttons($width: 8rem, $height: 2.8rem) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .negative {
+    input {
+      @include button(white, black, $width, $height);
+    }
+    margin-right: 1rem;
+    :hover {
+      background: linear-gradient(to bottom, $medium-gray, white);
+    }
+  }
+  .positive {
+    input {
+      @include button($btn-blue, white, $width, $height);
+    }
+    :hover {
+      background: linear-gradient(to bottom, $dark-blue, $btn-blue);
+    }
+  }
+}
+
+@mixin modal-phrase {
+  line-height: 150%;
+  font-size: $big-font;
+  text-align: center;
+  .emoji {
+    margin-bottom: 1rem;
+    font-size: $giant-big-font;
+  }
+  .subContent {
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    color: $pp-blue;
+    font-size: $small-font;
+  }
+  margin-bottom: 2rem;
+}
+
+@mixin modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem 1.5rem;
+}
+
+@mixin spanUpDownAnimation($fontSize, $padding) {
+  padding: $padding;
+  font-size: $fontSize;
+  animation: upDown 0.75s infinite;
+}
+
+@mixin userImage($size) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: linear-gradient(to right bottom, $g1-top, $g1-bottom);
+  img {
+    border-radius: 50%;
+  }
+}
+
+@keyframes upDown {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-0.2rem);
+  }
+}
