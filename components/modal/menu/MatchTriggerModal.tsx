@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useSetRecoilState, useResetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { errorState } from 'utils/recoil/error';
-import { openMenuBarState } from 'utils/recoil/layout';
-import { modalState } from 'utils/recoil/modal';
 import instance from 'utils/axios';
 import styles from '/styles/modal/MatchTriggerModal.module.scss';
 
@@ -14,9 +12,7 @@ export default function MatchTriggerModal() {
   const [slotId, setSlotId] = useState<SlotId>({
     slotId: 0,
   });
-  const setModal = useSetRecoilState(modalState);
   const setError = useSetRecoilState(errorState);
-  const resetOpenMenuBar = useResetRecoilState(openMenuBarState);
   const matchTriggerResponse: { [key: string]: string } = {
     E0001: '잘못된 요청입니다.',
   };
@@ -35,8 +31,6 @@ export default function MatchTriggerModal() {
     if (slotId.slotId) {
       try {
         await instance.post('/pingpong/admin/matchtrigger', slotId);
-        setModal({ modalName: null });
-        resetOpenMenuBar();
         alert('매치 시작 요청 완료 !');
       } catch (e: any) {
         if (e.response.data.code in matchTriggerResponse) {
