@@ -59,19 +59,19 @@
   </tr>
   <tr>
     <td align=center>Beta</td>
-    <td align=center>레이아웃, 메인 페이지<br />와이어프레임, 디자인</td>
-    <td align=center>랭크, 로그인,<br /> 에러 페이지</td>
-    <td align=center>매치, 유저 페이지,<br /> 모달 통합 관리</td>
-    <td align=center>게임 페이지<br />배포 자동화</td>
-    <td align=center>여러 모달<br />디자인 시안</td>
+    <td align=center>와이어프레임 및 디자인,<br />레이아웃 구현,<br />메인 페이지 구현</td>
+    <td align=center>랭크 페이지 구현,<br />로그인 구현,<br />에러 페이지 구현<br />및 에러 코드 정리</td>
+    <td align=center>매치 페이지 구현,<br />유저 페이지 구현,<br />모달 관리 컴포넌트 구현</td>
+    <td align=center>게임 페이지 구현,<br />배포 자동화</td>
+    <td align=center>디자인,<br />전체 모달 구현,<br />검색창 리팩토링,<br />css 정리</td>
   </tr>
   <tr>
     <td align=center>Version1</td>
-    <td align=center>랭크, 게임 페이지<br />일반전 적용 및 리팩토링</td>
-    <td align=center>통계 페이지,<br />레이아웃 일반전 적용</td>
-    <td align=center>레이아웃, 메인 페이지<br />일반전 적용 및 리팩토링</td>
-    <td align=center>통계 페이지,<br />모달 애니메이션 적용</td>
-    <td align=center>매치, 유저 페이지<br />일반전 적용 및 리팩토링</td>
+    <td align=center>랭크 페이지,<br />게임 페이지<br />일반전 적용 및 리팩토링</td>
+    <td align=center>통계 페이지,<br />레이아웃<br />일반전 적용</td>
+    <td align=center>레이아웃,<br />메인 페이지<br />일반전 적용 및 리팩토링</td>
+    <td align=center>통계 페이지 구현,<br />모달 애니메이션 적용</td>
+    <td align=center>모달, 매치 페이지,<br />유저 페이지,<br />일반전 적용 및 리팩토링</td>
   </tr>
 </table>
 
@@ -91,8 +91,8 @@
   </tr>
   <tr>
     <td align=center>소프트 웨이브</td>
-    <td align=center>,,</td>
-    <td align=center>,,</td>
+    <td align=center>챌린지 모달 구현,<br />관리자용 모달 구현,<br />스크롤 리팩토링,<br />로그인 구현,<br />각종 에러 처리</td>
+    <td align=center>알림바, 상단 배너,<br />매치 페이지, 검색창,<br />매뉴얼 모달,<br />소프트웨이브 버전으로<br />리팩토링</td>
   </tr>
 </table>
 
