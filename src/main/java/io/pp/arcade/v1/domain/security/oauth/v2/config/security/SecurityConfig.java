@@ -62,21 +62,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .httpBasic().disable()
                     .exceptionHandling()
                     .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-                    .accessDeniedHandler(tokenAccessDeniedHandler)
-                .and()
-                    .oauth2Login()
-                    .authorizationEndpoint()
-                    .baseUri("/oauth2/authorization")
-                    .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
-                .and()
-                    .redirectionEndpoint()
-                    .baseUri("/*/oauth2/code/*")
-                .and()
-                    .userInfoEndpoint()
-                    .userService(oAuth2UserService)
-                .and()
-                    .successHandler(oAuth2AuthenticationSuccessHandler())
-                    .failureHandler(oAuth2AuthenticationFailureHandler());
+                    .accessDeniedHandler(tokenAccessDeniedHandler);
+//                .and()
+//                    .oauth2Login()
+//                    .authorizationEndpoint()
+//                    .baseUri("/oauth2/authorization")
+//                    .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
+//                .and()
+//                    .redirectionEndpoint()
+//                    .baseUri("/*/oauth2/code/*")
+//                .and()
+//                    .userInfoEndpoint()
+//                    .userService(oAuth2UserService)
+//                .and()
+//                    .successHandler(oAuth2AuthenticationSuccessHandler())
+//                    .failureHandler(oAuth2AuthenticationFailureHandler());
 
         //http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
