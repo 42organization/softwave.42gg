@@ -1,0 +1,17 @@
+.gradle/
+./.idea
+.idea/
+42ggmain.sh
+42ggtest.sh
+softwave.sh
+BOOT-INF/
+backup_2022-08-23$05:00:01.sql
+build/
+out/
+logs/
+src/main/resources/application-local.yml
+src/main/resources/application-main.yml
+src/main/resources/application-test.yml
+src/main/resources/application.yml
+src/main/resources/application-softwave.yml
+was-logs/
