@@ -11,12 +11,12 @@ import {
 import { errorState } from 'utils/recoil/error';
 import { modalState } from 'utils/recoil/modal';
 import { seasonListState } from 'utils/recoil/seasons';
+import { pageState } from 'utils/recoil/myRank';
 import instance from 'utils/axios';
 import Header from './Header';
 import Footer from './Footer';
 import CurrentMatch from './CurrentMatch';
 import styles from 'styles/Layout/Layout.module.scss';
-import { pageState } from 'utils/recoil/myRank';
 
 type AppLayoutProps = {
   children: React.ReactNode;
