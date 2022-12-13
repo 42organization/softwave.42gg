@@ -92,4 +92,4 @@
 <a href="https://github.com/Arkingco">🐨 박기선 @kipark</a><br/>
 <a href="https://github.com/tamagoyakii">🐤 김지현 @jihyukim</a><br/>
 <a href="https://github.com/raehy19">🐱 정래현 @rjeong</a><br/>
-<a href="https://github.com/HyeongwooIM">🐬임형우 @him</a><br/>
+<a href="https://github.com/HyeongwooIM">🐬 임형우 @him</a><br/>
